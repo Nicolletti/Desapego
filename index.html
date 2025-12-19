@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="pt-PT">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Desapego de Móveis</title>
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: "Segoe UI", Tahoma, sans-serif;
+    }
+
+    body {
+      background-color: #f5f5f5;
+      color: #333;
+    }
+
+    header {
+      background-color: #ffffff;
+      padding: 20px;
+      text-align: center;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+    }
+
+    header h1 {
+      font-size: 2rem;
+    }
+
+    header p {
+      color: #777;
+    }
+
+    h2, p {
+      text-align: center;
+      margin: 20px; 
+    }
+
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 40px;
+    }
+
+    .card {
+      background-color: #fff;
+      border-radius: 14px;
+      overflow: hidden;
+      box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+      margin: 20px; 
+    }
+
+    .card p {
+      text-align: left;
+    }
+
+    /* ===== CARROSSEL ===== */
+    .carousel {
+      position: relative;
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+    }
+
+    .carousel img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+      display: none;
+      cursor: pointer;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background: rgba(0,0,0,0.6);
+      color: #fff;
+      border: none;
+      padding: 8px 12px;
+      cursor: pointer;
+      border-radius: 50%;
+    }
+
+    .carousel .prev { left: 10px; }
+    .carousel .next { right: 10px; }
+
+    .card-content {
+      padding: 18px;
+    }
+
+    .price {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    footer {
+      margin-top: 60px;
+      padding: 20px;
+      text-align: center;
+      background-color: #ffffff;
+      color: #888;
+    }
+
+    /* ===== MODAL ===== */
+    .modal {
+      display: none;
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,0.85);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal img {
+      max-width: 90%;
+      max-height: 90%;
+      border-radius: 12px;
+    }
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>Desapego</h1>
+  <p>Móveis bonitos e em perfeito estado</p>
+</header>
+
+<h2>Letícia Nicolletti</h2>
+<p>Contacto: 962 751 509 · leticianicolletti@gmail.com</p>
+<p>Recolha em Alverca</p>
+
+<main>
+  <section class="grid">
+
+    <!-- PRODUTO 1 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="cama1.jpeg" class="active" onclick="openModal(this)">
+        <img src="cama2.jpeg" onclick="openModal(this)">
+        <img src="cama3.jpeg" onclick="openModal(this)">
+        <img src="cama.jpeg"  onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Cama de casal</h3>
+        <p>Cama de casal em excelente estado com gavetas internas (colchão não incluído).</p>
+        <div class="price">€180</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 2 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="colchao2.jpeg" class="active" onclick="openModal(this)">
+        <img src="colchao1.jpeg" onclick="openModal(this)">
+        <img src="colchao3.jpeg" onclick="openModal(this)">
+        <img src="colchao.jpeg"  onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Colchão de casal</h3>
+        <p>Colchão de casal sem manchas e em ótimo estado.</p>
+        <div class="price">€125</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 3 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_de_cabeceira1.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_de_cabeceira2.jpeg" onclick="openModal(this)">
+        <img src="mesa_de_cabeceira.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa de cabeceira</h3>
+        <p>Mesa de cabeceira branca com gaveta (2 unidades).</p>
+        <div class="price">€70 (€35 cada)</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 4 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="cama_solteiro1.jpeg" class="active" onclick="openModal(this)">
+        <img src="cama_solteiro2.jpeg" onclick="openModal(this)">
+        <img src="cama_solteiro.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Cama de solteiro</h3>
+        <p>Cama de solteiro em excelente estado com base metálica (colchão não incluido).</p>
+        <div class="price">€40</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 5 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="colchao_solteiro1.jpeg" class="active" onclick="openModal(this)">
+        <img src="colchao_solteiro2.jpeg" onclick="openModal(this)">
+        <img src="colchao_solteiro.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Colchão de solteiro</h3>
+        <p>Colchão de solteiro sem manchas e em ótimo estado.</p>
+        <div class="price">€85</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 6 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="macrame1.jpeg" class="active" onclick="openModal(this)">
+        <img src="macrame2.jpeg" onclick="openModal(this)">
+        <img src="macrame3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Macramê</h3>
+        <p>Macramê artesanal e decorativo.</p>
+        <div class="price">€20</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 7 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_jantar1.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_jantar.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa de jantar</h3>
+        <p>Mesa de jantar em madeira, extende de 130cm para 190cm.</p>
+        <div class="price">€70</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 8 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="cadeira_mesa_jantar1.jpeg" class="active" onclick="openModal(this)">
+        <img src="cadeira_mesa_jantar2.jpeg" onclick="openModal(this)">
+        <img src="mesa_jantar1.jpeg" onclick="openModal(this)">
+        <img src="cadeira_mesa_jantar.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Cadeira</h3>
+        <p>Cadeira de madeira em ótimo estado (6 unidades).</p>
+        <div class="price">€150 (€25 cada)</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 9 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="movel_tv1.jpeg" class="active" onclick="openModal(this)">
+        <img src="movel_tv2.jpeg" onclick="openModal(this)">
+        <img src="movel_tv3.jpeg" onclick="openModal(this)">
+        <img src="movel_tv.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Móvel para TV</h3>
+        <p>Móvel para TV em madeira. Contém uma pequena rachadura na primeira gaveta.</p>
+        <div class="price">€90</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="sofa1.jpeg" class="active" onclick="openModal(this)">
+        <img src="sofa2.jpeg" onclick="openModal(this)">
+        <img src="sofa3.jpeg" onclick="openModal(this)">
+        <img src="sofa.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Sofá/Cama</h3>
+        <p>Sofá/Cama em tecido, 3 lugares, com baú interno.</p>
+        <div class="price">€220</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="tapete1.jpeg" class="active" onclick="openModal(this)">
+        <img src="tapete2.jpeg" onclick="openModal(this)">
+        <img src="tapete3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Tapete</h3>
+        <p>Tapete com pelos curtos em tons de cinza, ótimo estado 1,70 x 2,40cm.</p>
+        <div class="price">€65</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="abajur1.jpeg" class="active" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Abajur</h3>
+        <p>Abajur com base de metal, acende por botão.</p>
+        <div class="price">€30</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="estante_quarto2.jpeg" class="active" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Estante</h3>
+        <p>Estante com base metálica e prateleiras de madeira.</p>
+        <div class="price">€15</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="comoda1.jpeg" class="active" onclick="openModal(this)">
+        <img src="comoda.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Comoda</h3>
+        <p>Comoda em madeira, 4 gavetas grandes, estado excelente.</p>
+        <div class="price">€45</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_madeira2.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_madeira3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa de Madeira trançada</h3>
+        <p>Mesa de madeira trançada com baú na parte inferior 70 x 52 cm.</p>
+        <div class="price">€45</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="movel_sala1.jpeg" class="active" onclick="openModal(this)">
+        <img src="movel_sala2.jpeg" onclick="openModal(this)">
+        <img src="movel_sala3.jpeg" onclick="openModal(this)">
+
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Móvel de Sala</h3>
+        <p>Móvel de sala com topo de vidro e base em madeira.</p>
+        <div class="price">€60</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="pendurador1.jpeg" class="active" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Pendurador</h3>
+        <p>Pendurador de casacos, feito de madeira.</p>
+        <div class="price">€20</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="sapateira3.jpeg" class="active" onclick="openModal(this)">
+        <img src="sapateira2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Sapateira</h3>
+        <p>Sapateira com 2 prateleiras de metal e base em madeira.</p>
+        <div class="price">€40</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="quadros1.jpeg" class="active" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Quadros Decorativos</h3>
+        <p>Quadros decorativos em madeira, 3 quadros.</p>
+        <div class="price">€20</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="estante_parede1.jpeg" class="active" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Estante de Parede</h3>
+        <p>Estante de parede, feito em madeira.</p>
+        <div class="price">€10</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="cadeira_cama1.jpeg" class="active" onclick="openModal(this)">
+        <img src="cadeira_cama2.jpeg" onclick="openModal(this)">
+        <img src="cadeira_cama3.jpeg" onclick="openModal(this)">
+        <img src="cadeira_cama4.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mini Sofá/Cama</h3>
+        <p>Base de ferro, é retrátil e vem com a capa. Pequeno defeito na base de madeira.</p>
+        <div class="price">€80</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_cozinha1.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_cozinha2.jpeg" onclick="openModal(this)">
+        <img src="mesa_cozinha3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa</h3>
+        <p>Mesa feita em madeira com 2 cadeiras, extensível.</p>
+        <div class="price">€100</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_varanda1.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_varanda2.jpeg" onclick="openModal(this)">
+        <img src="mesa_varanda3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa de Varanda</h3>
+        <p>Mesa de madeira extensível, com os pés um pouco danificados.</p>
+        <div class="price">€40</div>
+      </div>
+    </div>
+
+  
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="aquecedor1.jpeg" class="active" onclick="openModal(this)">
+        <img src="aquecedor2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Aquecedor</h3>
+        <p>Aquecedor elétrico da Kunft, com regulador e 3 níveis de aquecimento.</p>
+        <div class="price">€18</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="aquecedor2_1.jpeg" class="active" onclick="openModal(this)">
+        <img src="aquecedor2_2.jpeg" onclick="openModal(this)">
+        <img src="aquecedor2_3.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Aquecedor</h3>
+        <p>Aquecedor a óleo Kunft, com regulador de temperatura.</p>
+        <div class="price">€30</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="cafeteira1.jpeg" class="active" onclick="openModal(this)">
+        <img src="cafeteira2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Cafeteira</h3>
+        <p>Cafeteira da Delta. Em ótimo estado, funciona perfeitamente.</p>
+        <div class="price">€20</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="estante_cozinha1.jpeg" class="active" onclick="openModal(this)">
+        <img src="estante_cozinha2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Estante de Cozinha</h3>
+        <p>Estante de madeira para cozinha, com 3 prateleiras.</p>
+        <div class="price">€20</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 11 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="armario_cozinha.jpeg" class="active" onclick="openModal(this)">
+        <img src="armario_cozinha1.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Armário de Cozinha</h3>
+        <p>Armário de madeira para cozinha, com 3 prateleiras e 2 portas.</p>
+        <div class="price">€45</div>
+      </div>
+    </div>
+
+    <!-- PRODUTO 12 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="bancos1.jpeg" class="active" onclick="openModal(this)">
+        <img src="bancos2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Bancos</h3>
+        <p>Bancos de madeira para cozinha (3 bancos).</p>
+        <div class="price">€30</div>
+      </div>
+    </div>
+
+  </section>
+
+  <section class="grid">
+
+    <!-- PRODUTO 10 -->
+    <div class="card">
+      <div class="carousel">
+        <img src="mesa_varanda_retratil1.jpeg" class="active" onclick="openModal(this)">
+        <img src="mesa_varanda_retratil2.jpeg" onclick="openModal(this)">
+
+        <button class="prev" onclick="changeSlide(this, -1)">&#10094;</button>
+        <button class="next" onclick="changeSlide(this, 1)">&#10095;</button>
+      </div>
+
+      <div class="card-content">
+        <h3>Mesa de Varanda Retratil</h3>
+        <p>Mesa de madeira para varanda, retratil e em ótimo estado.</p>
+        <div class="price">€30</div>
+      </div>
+    </div>
+
+  </section>
+</main>
+
+<footer>
+  Em caso de dúvidas, contacte-nos através do email ou telefone fornecido acima.
+</footer>
+
+<!-- MODAL -->
+<div class="modal" id="imageModal" onclick="closeModal()">
+  <img id="modalImage">
+</div>
+
+<!-- JAVASCRIPT -->
+<script>
+function changeSlide(button, direction) {
+  const carousel = button.parentElement;
+  const images = carousel.querySelectorAll("img");
+  let currentIndex = 0;
+
+  images.forEach((img, index) => {
+    if (img.classList.contains("active")) {
+      currentIndex = index;
+      img.classList.remove("active");
+    }
+  });
+
+  let newIndex = currentIndex + direction;
+  if (newIndex < 0) newIndex = images.length - 1;
+  if (newIndex >= images.length) newIndex = 0;
+
+  images[newIndex].classList.add("active");
+}
+
+function openModal(img) {
+  document.getElementById("modalImage").src = img.src;
+  document.getElementById("imageModal").classList.add("active");
+}
+
+function closeModal() {
+  document.getElementById("imageModal").classList.remove("active");
+}
+</script>
+
+</body>
+</html>
